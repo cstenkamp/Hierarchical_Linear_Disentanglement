@@ -1,0 +1,32 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+    -   id: check-json
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+    -   id: check-added-large-files
+    -   id: requirements-txt-fixer
+-   repo: https://github.com/psf/black
+    rev: 19.10b0
+    hooks:
+    - id: black
+      language_version: python3.8
+-   repo: git://github.com/pycqa/flake8
+    rev: 3.8.2
+    hooks:
+    -   id: flake8
+-   repo: git://github.com/timothycrosley/isort
+    rev: 5.3.0
+    hooks:
+    - id: isort
+      args: [ "--profile", "black" ]
+-   repo: local
+    hooks:
+      - id: jupyter-nb-clear-output
+        name: jupyter-nb-clear-output
+        files: \.ipynb$
+        stages: [commit]
+        language: system
+        entry: jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace
